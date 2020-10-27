@@ -55,7 +55,6 @@ export default {
           this.$refs.calendar.offsetHeight +
           "px";
         this.$refs.record.style.height = sHeight;
-        console.log(this.$refs.scroll)
         this.$refs.scroll.$refs.wrapper.style.height = sHeight;
         this.$refs.scroll.refresh()
       }, 10);
