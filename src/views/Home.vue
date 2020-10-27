@@ -55,13 +55,15 @@ export default {
           this.$refs.calendar.offsetHeight +
           "px";
         this.$refs.record.style.height = sHeight;
-        console.log(this.$refs.scroll)
-        this.$refs.scroll.$refs.wrapper.style.height = sHeight;
-        this.$refs.scroll.refresh()
-      }, 50);
+        // console.log(sHeight);
+        // console.log(this.$refs.scroll);
+        // this.$refs.scroll.$refs.wrapper.style.height = sHeight;
+        // this.$refs.scroll.refresh()
+      }, 10);
     },
     changeMonth() {
       this.getCalendarHeight();
+      this.$refs.scroll.refresh();
     },
     // 选择日期
     choseDay(time) {
@@ -83,10 +85,13 @@ export default {
     this.initDate();
   },
   mounted() {
-    this.getCalendarHeight();
-    window.addEventListener("resize", () => {
+    this.$nextTick(() => {
       this.getCalendarHeight();
-    });
+      window.addEventListener("resize", () => {
+        this.getCalendarHeight();
+        this.$refs.scroll.refresh();
+      });
+    })
   },
 };
 </script>
@@ -99,8 +104,8 @@ export default {
 .record {
   position: relative;
 }
-.scroll{
-  /* height: 100%; */
+.scroll {
+  height: 100%;
   overflow: hidden;
 }
 .no-data {
